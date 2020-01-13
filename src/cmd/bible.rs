@@ -93,7 +93,6 @@ pub fn execute(db_dir: &str, matches: &ArgMatches) {
                 query.push_str(")");
             }
 
-            eprintln!("{}", query);
             let mut stmt = conn.prepare(&query).unwrap();
             let verse_iter = stmt
                 .query_map(
