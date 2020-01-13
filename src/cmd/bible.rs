@@ -7,16 +7,24 @@ pub fn make_subcommand<'a, 'b>() -> App<'a, 'b> {
     App::new("bible")
         .about("Read bible verses")
         .setting(AppSettings::ArgRequiredElseHelp)
+        .setting(AppSettings::ColoredHelp)
         .arg_from_usage("-v --version=[version] 'Version to use (defualt KJV)'")
-        .subcommand(App::new("books"))
+        .subcommand(App::new("books")
+            .about("Prints out a list of books")
+            .setting(AppSettings::ColoredHelp))
         .subcommand(App::new("verse")
+            .about("Prints out a specific verse")
+            .setting(AppSettings::ColoredHelp)
             .arg_from_usage("<book>")
             .arg_from_usage("<chapter>")
             .arg_from_usage("<verse>"))
         .subcommand(App::new("verses")
-            .arg_from_usage("<book>")
-            .arg_from_usage("<chapters>")
-            .arg_from_usage("[verses]"))
+            .setting(AppSettings::ColoredHelp)
+            .about("Prints out a range of verses from the same book")
+            .arg_from_usage("<book> 'eg. John'")
+            .arg_from_usage("<chapters> 'eg. 1 or 2-3
+Note that Job 1-2 3-4 prints Job 1:3-4 and Job 2:3-4'")
+            .arg_from_usage("[verses] 'eg. 2 or 2-3 or 2,5-7'"))
 }
 
 pub fn execute(db_dir: &str, matches: &ArgMatches) {
