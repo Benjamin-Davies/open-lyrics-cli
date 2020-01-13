@@ -1,0 +1,10 @@
+[package]
+name = "open-lyrics-cli"
+version = "0.1.0"
+authors = ["Benjamin-Davies <bentendavies@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+clap = "2.33"
+regex = "1.3"
+rusqlite = "0.21"
